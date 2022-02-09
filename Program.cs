@@ -1,13 +1,15 @@
-// criando servidor WEB - rodando na porta 7051
 using MiniTodo.Data;
 using MiniTodo.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Conexao com o Banco
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapGet("/v1/todos", (AppDbContext context) =>
 {
